@@ -1,9 +1,9 @@
 import os
 
-from boilerplate.settings import *
+from boilerplate.settings.base import *
 
 ###############################################################################
-# PRODUCTION SETTINGS
+# STAGING SETTINGS
 ###############################################################################
 
 # SECURITY WARNING: don't run with debug turned on in production!

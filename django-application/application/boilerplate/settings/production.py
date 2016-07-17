@@ -1,13 +1,13 @@
 import os
 
-from boilerplate.settings import *
+from boilerplate.settings.base import *
 
 ###############################################################################
-# DEVELOPMENT SETTINGS
+# PRODUCTION SETTINGS
 ###############################################################################
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ###############################################################################
 # DATABASE
@@ -37,4 +37,23 @@ DATABASES = {
 # EMAIL SETTINGS
 ###############################################################################
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+SERVER_EMAIL = "application@in2systems.nl"
+DEFAULT_FROM_EMAIL = os.environ.get("WEBMASTER_EMAIL_USER")
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.strato.com"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.environ.get("WEBMASTER_EMAIL_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("WEBMASTER_EMAIL_PASS")
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_TIMEOUT = 60
+
+###############################################################################
+# CSRF Protection
+###############################################################################
+
+ALLOWED_HOSTS = []
+
+# Sets the domains that have access to the API
+CORS_ORIGIN_WHITELIST = []

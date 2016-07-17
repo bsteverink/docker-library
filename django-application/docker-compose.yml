@@ -16,14 +16,14 @@ services:
       - db
     links:
       - db
-    command: python manage.py runserver 0.0.0.0:8000
+    command: develop-run
     volumes:
       - ./application:/home/django
       - ./logs:/var/log/django
     ports:
       - "8000:8000"
     environment:
-      DJANGO_SETTINGS_MODULE: "boilerplate.serversettings.development"
+      DJANGO_SETTINGS_MODULE: "boilerplate.settings.development"
       ENVIRONMENT: development
       DJANGO_SECRET_KEY: "apf!xv(^f)&miaz_l-0p&3k*ks5vtqvmm&!azafffbbi%d1a9z"
       DATABASE_HOST: db

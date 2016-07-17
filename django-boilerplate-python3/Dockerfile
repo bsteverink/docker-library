@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
 		gcc \
 		gettext \
 		mysql-client libmysqlclient-dev \
-		sqlite3 \
 	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Set up user
@@ -20,6 +19,10 @@ RUN useradd django -u 1000
 
 RUN mkdir /home/django && chown -R django: /home/django
 RUN mkdir /var/log/django && chown -R django: /var/log/django
+RUN mkdir /var/log/gunicorn && chown -R django: /var/log/gunicorn
+
+RUN mkdir /www
+RUN mkdir /www/boilerplate && chown -R django: /www/boilerplate
 
 # How to properly make sure that the user can write to site-packages (pip install)
 #	and be able to run django-admin commands?
