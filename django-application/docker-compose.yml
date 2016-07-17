@@ -1,0 +1,34 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - "./files/.data/db:/var/lib/mysql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: g3h3im
+      MYSQL_DATABASE: boilerplate
+      MYSQL_USER: boilerplate
+      MYSQL_PASSWORD: g3h3im
+  web:
+    build: .
+    depends_on:
+      - db
+    links:
+      - db
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./application:/home/django
+      - ./logs:/var/log/django
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: "boilerplate.serversettings.development"
+      ENVIRONMENT: development
+      DJANGO_SECRET_KEY: "apf!xv(^f)&miaz_l-0p&3k*ks5vtqvmm&!azafffbbi%d1a9z"
+      DATABASE_HOST: db
+      DATABASE_NAME: boilerplate
+      DATABASE_USER: boilerplate
+      DATABASE_PASS: g3h3im
+      WEBMASTER_EMAIL_USER: bart@in2systems.nl
+      WEBMASTER_EMAIL_PASS: g3h3im
