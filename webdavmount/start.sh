@@ -9,8 +9,12 @@ echo "User is $WEBDAV_USER"
 echo "Password is ************"
 echo "URL is $WEBDAV_URL"
 
+echo "${WEBDAV_URL} ${WEBDAV_USER} ${WEBDAV_PASSWORD}" > /home/$WD_USER/.davfs2/secrets && \
+echo "${WEBDAV_URL} /home/${WD_USER}/stack davfs user,rw,noauto 0 0" >> /etc/fstab
+
 mount "/home/$WD_USER/stack"
 
-echo "Mounted stack, going into infinite sync loop now."
+# Starting server
 
-while true; do cp -a /home/$WD_USER/host/. /home/$WD_USER/stack; sleep 5; done
+export FLASK_APP=server.py
+flask run --host=0.0.0.0

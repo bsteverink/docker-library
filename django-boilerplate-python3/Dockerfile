@@ -35,4 +35,5 @@ USER django
 WORKDIR /home/django
 COPY ./application /home/django
 
-RUN pip install -r requirements.txt
+RUN pip install -U pip
+RUN pip install -Ur requirements.txt
